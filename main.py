@@ -14,27 +14,275 @@ BOT_TOKEN = "8817608659:AAF8O-I58x-khZLq4AzY-OWTyfgPIcNEo1M"
 user_sessions = {}
 active_spams = {}
 
-# =============== كلمات التكليش ===============
+# =============== كلمات التكليش (مختصرة لتجنب الأخطاء) ===============
 TAKLEESH_WORDS = [
     "لحلكك الهالبك طيزمك", "اشيلك بعيري", "عبالك اعوفك؟", "انيجمك علصدرك", "ابن الزانيه",
-    "غير انت ابني", "مصمص عيورتي", "اهف اختك بطرف عيري", "اربطك بقياطين قندرتي",
-    "اشيل ربك واركعه بلكاع", "ابن الكحبه الستشرافيه", "ابن المراهقه", "امصمص ديوس اختك",
-    "ابن بلاعت العيرين", "احط الويسكي بكس اختك", "اتفل بصرمك", "اصابعي تفترسك",
-    "ابعبص صريمك", "ابن المتبربكه", "ابن الاسحاقيه", "ابن الناسوخيه", "اطحن ضلوعك",
-    "اكهرب طيزك", "احط قضيبي بكس امك", "ابن الانحطاطيه", "اسوي كسيسمك طشار",
-    "اشكشك ديوسك", "اقتحم نسلك", "اشلع راس اختك", "اتناطح وي عنابه امك", "اطب بين زرورك",
-    "ابن الهايته", "دشوف شراح اسوي", "ابن الانزلاقيه", "ابن جبتي الحاره", "ولك شبيك خفت",
-    "ابن الشراميط", "ابن التحب عيورتي", "ادحس عيري بكسمك", "ادك كسمك", "ابن الكحبه الرومانيه",
-    "ابن بلاعت العير", "اخدر امك", "اسوي طويزك وصلتين", "ابن ام العيوره", "اعوج ركبت امك",
-    "ازورك وجهك بعيري", "اصعد على ضهرك", "اتسودن عليك", "اهينك بعيري", "اهف راس امك بل طاوه",
-    "انكز على صريمك", "ابن عاشقه العير", "ابن الكحيبه", "اخضع العيري", "انزل لعنه عيري بكسمك",
-    "انيج امك الكحبه", "امك احطها بعيري", "وين تكدر لعيري", "نياج اختك", "اني اجك امك بعيري",
-    "ابن الربل", "اشك صريمك بلقندره", "انزل غضب الله بطيزك", "ابن الزنا", "امصمص نهود امك",
-    "ربك اسمطه", "طيز ابن الطيز", "ولك تعال مصعيري", "اعبد زبي", "المخنث", "كليشتي بكسمك",
-    "اصعق صريمك", "فحلمك اني", "اله البك طيزمك", "احط الدروب بطيزك", "ادحس الكعبه بطيزك",
-    "ابن القندره", "اكعد وصمه لصرمك", "اطشر صريمك", "وعلي ماتكدرلي", "ادحس البنكه بصرمك",
-    "انيج اختك البربوك", "افلشك تفليش", "اخلي عيري براسك", "دمبك العير", "ابن الفريخه",
-    "اذب تيزاب بكسمك", "ابول بحلكك", "افرش كسمك", "افلش كسمك بوكسات", "انيج رب ربك",
+    "مصمص عيورتي", "اهف اختك بطرف عيري", "اربطك بقياطين قندرتي", "اشيل ربك واركعه بلكاع",
+    "ابن الكحبه الستشرافيه", "ابن المراهقه", "امصمص ديوس اختك", "ابن بلاعت العيرين",
+    "احط الويسكي بكس اختك", "اتفل بصرمك", "اصابعي تفترسك", "ابعبص صريمك", "ابن المتبربكه",
+    "اطحن ضلوعك", "اكهرب طيزك", "احط قضيبي بكس امك", "اسوي كسيسمك طشار", "اشكشك ديوسك",
+    "اقتحم نسلك", "اشلع راس اختك", "اطب بين زرورك", "ابن الهايته", "ابن الانزلاقيه",
+    "ادحس عيري بكسمك", "ادك كسمك", "اخدر امك", "انيج امك الكحبه", "ربك اسمطه", "اعبد زبي",
+    "المخنث", "اصعق صريمك", "احط الدروب بطيزك", "اطشر صريمك", "ادحس البنكه بصرمك",
+    "انيج اختك البربوك", "افلشك تفليش", "دمبك العير", "اذب تيزاب بكسمك", "افرش كسمك",
+    "انيج رب ربك", "افترس طيزك", "احط عيورتي بطيزمك", "اخدر طيزختك", "اطشر مخك بعيري",
+    "اضربمك", "انيجمك فرنسي", "اخرمش طيزك", "العب بوبجي بكسمك", "الفيمبوي", "اتنايج وي اهلك"
+]
+
+# =============== كلمات التسطير (مختصرة) ===============
+TASTEER_WORDS = [
+    "القحاب", "يا اخو الشرموطه", "يا ابن الوسيعه", "يا ديوث", "يا ابن القحبه",
+    "يا خنيث", "يا اخو الشرموط", "الخنيث", "يا ابن الديوث", "يا ابن الزب",
+    "اصمل بنيك", "عار امك", "يا مخنث", "يا ابن الكس", "يا ابن الهايته",
+    "يا حمار", "يا فحل اختك", "يا كس امك", "يا زب الكلب", "يا ابن المتناكه",
+    "يا شرمطه", "يا عاهر", "يا خول", "يا قواد", "يا منيوك"
+]
+
+# =============== دوال تسجيل الدخول ===============
+async def send_code(user_id, phone):
+    client = TelegramClient(f"sessions/user_{user_id}", API_ID, API_HASH)
+    await client.connect()
+    
+    if not await client.is_user_authorized():
+        try:
+            await client.send_code_request(phone)
+            user_sessions[user_id] = {"client": client, "phone": phone, "step": "waiting_code"}
+            return True
+        except Exception as e:
+            return str(e)
+    else:
+        user_sessions[user_id] = {"client": client, "phone": phone, "step": "ready"}
+        return True
+
+async def verify_code(user_id, code):
+    data = user_sessions.get(user_id)
+    if not data or data["step"] != "waiting_code":
+        return False
+    
+    client = data["client"]
+    phone = data["phone"]
+    
+    try:
+        await client.sign_in(phone, code)
+        user_sessions[user_id]["step"] = "ready"
+        return True
+    except SessionPasswordNeededError:
+        user_sessions[user_id]["step"] = "waiting_password"
+        return "password_needed"
+    except Exception as e:
+        return str(e)
+
+async def verify_password(user_id, password):
+    data = user_sessions.get(user_id)
+    if not data or data["step"] != "waiting_password":
+        return False
+    
+    client = data["client"]
+    try:
+        await client.sign_in(password=password)
+        user_sessions[user_id]["step"] = "ready"
+        return True
+    except Exception as e:
+        return str(e)
+
+def is_verified(user_id):
+    return user_id in user_sessions and user_sessions[user_id].get("step") == "ready"
+
+# =============== دوال الإرسال ===============
+async def send_takleesh_messages(user_id, target, count, chat_id, bot):
+    if user_id in active_spams:
+        active_spams[user_id]["stop"] = False
+    else:
+        active_spams[user_id] = {"stop": False}
+    
+    client = user_sessions[user_id]["client"]
+    
+    for i in range(count):
+        if active_spams[user_id]["stop"]:
+            await bot.send_message(chat_id, "🛑 تم إيقاف التكليش.")
+            break
+        
+        word = random.choice(TAKLEESH_WORDS)
+        try:
+            await client.send_message(target, word)
+        except Exception as e:
+            await bot.send_message(chat_id, f"❌ فشل الإرسال: {str(e)}")
+            break
+        
+        await asyncio.sleep(1)
+    
+    await bot.send_message(chat_id, f"✅ تم إرسال {count} كليشة.")
+    if user_id in active_spams:
+        del active_spams[user_id]
+
+async def send_tasteer_messages(user_id, target, delay, chat_id, bot):
+    if user_id in active_spams:
+        active_spams[user_id]["stop"] = False
+    else:
+        active_spams[user_id] = {"stop": False}
+    
+    client = user_sessions[user_id]["client"]
+    
+    for i in range(3):
+        if active_spams[user_id]["stop"]:
+            await bot.send_message(chat_id, "🛑 تم إيقاف التسطير.")
+            break
+        
+        word = random.choice(TASTEER_WORDS)
+        try:
+            await client.send_message(target, word)
+        except Exception as e:
+            await bot.send_message(chat_id, f"❌ فشل الإرسال: {str(e)}")
+            break
+        
+        await asyncio.sleep(delay)
+    
+    await bot.send_message(chat_id, "✅ تم الانتهاء من التسطير.")
+    if user_id in active_spams:
+        del active_spams[user_id]
+
+# =============== بوت التحكم ===============
+bot = AsyncTeleBot(BOT_TOKEN)
+
+@bot.message_handler(commands=['start'])
+async def start(message):
+    user_id = message.from_user.id
+    if is_verified(user_id):
+        await bot.reply_to(message, "✅ أنت مسجل الدخول بالفعل.\nاستخدم:\n/takleesh - للتكليش\n/tasteer - للتسطير\n/stop - للإيقاف")
+    else:
+        await bot.reply_to(message, "🔐 مرحبًا بك.\nأرسل رقم هاتفك مع رمز الدولة:\nمثال: +9647701234567")
+
+@bot.message_handler(commands=['login'])
+async def login(message):
+    user_id = message.from_user.id
+    if is_verified(user_id):
+        await bot.reply_to(message, "✅ أنت مسجل بالفعل.")
+        return
+    
+    await bot.reply_to(message, "📱 أرسل رقم هاتفك مع رمز الدولة:\nمثال: +9647701234567")
+
+@bot.message_handler(func=lambda m: m.text and m.text.startswith('+') and len(m.text) >= 10)
+async def handle_phone(message):
+    user_id = message.from_user.id
+    phone = message.text.strip()
+    
+    await bot.reply_to(message, "⏳ جاري إرسال كود التفعيل...")
+    
+    result = await send_code(user_id, phone)
+    if result is True:
+        await bot.reply_to(message, "✅ تم إرسال كود التفعيل إلى حسابك.\nأدخل الكود بمسافات:\nمثال: 1 2 3 4 5")
+    else:
+        await bot.reply_to(message, f"❌ فشل الإرسال: {result}")
+
+@bot.message_handler(func=lambda m: re.match(r'^\d(\s\d)+$', m.text))
+async def handle_code(message):
+    user_id = message.from_user.id
+    code = message.text.strip().replace(" ", "")
+    
+    result = await verify_code(user_id, code)
+    if result is True:
+        await bot.reply_to(message, "✅ تم تسجيل الدخول بنجاح!\nاستخدم:\n/takleesh - للتكليش\n/tasteer - للتسطير\n/stop - للإيقاف")
+    elif result == "password_needed":
+        await bot.reply_to(message, "🔐 حسابك مفعل بخطوتين. أرسل كلمة المرور:")
+    else:
+        await bot.reply_to(message, f"❌ كود خاطئ.\nاستخدم /login مرة أخرى")
+
+@bot.message_handler(func=lambda m: user_sessions.get(m.from_user.id, {}).get("step") == "waiting_password")
+async def handle_password(message):
+    user_id = message.from_user.id
+    password = message.text.strip()
+    
+    result = await verify_password(user_id, password)
+    if result is True:
+        await bot.reply_to(message, "✅ تم تسجيل الدخول بنجاح!")
+    else:
+        await bot.reply_to(message, "❌ كلمة مرور خاطئة.")
+
+@bot.message_handler(commands=['takleesh'])
+async def takleesh(message):
+    user_id = message.from_user.id
+    
+    if not is_verified(user_id):
+        await bot.reply_to(message, "❌ يجب تسجيل الدخول أولاً. استخدم /login")
+        return
+    
+    if user_id in active_spams:
+        await bot.reply_to(message, "⚠️ يوجد عملية نشطة. استخدم /stop أولاً")
+        return
+    
+    await bot.reply_to(message, "✍️ أرسل معرف المستخدم المستهدف:")
+    bot.register_next_step_handler(message, get_target_takleesh)
+
+async def get_target_takleesh(message):
+    target = message.text.strip()
+    await bot.reply_to(message, "🔢 كم رسالة تريد إرسالها؟")
+    bot.register_next_step_handler(message, lambda m: start_takleesh(m, target))
+
+async def start_takleesh(message, target):
+    user_id = message.from_user.id
+    
+    try:
+        count = int(message.text.strip())
+        if count < 1:
+            raise ValueError
+    except:
+        await bot.reply_to(message, "❌ عدد غير صالح.")
+        return
+    
+    await bot.reply_to(message, f"⚡ بدء إرسال {count} كليشة...")
+    asyncio.create_task(send_takleesh_messages(user_id, target, count, message.chat.id, bot))
+
+@bot.message_handler(commands=['tasteer'])
+async def tasteer(message):
+    user_id = message.from_user.id
+    
+    if not is_verified(user_id):
+        await bot.reply_to(message, "❌ يجب تسجيل الدخول أولاً.")
+        return
+    
+    if user_id in active_spams:
+        await bot.reply_to(message, "⚠️ يوجد عملية نشطة. استخدم /stop أولاً")
+        return
+    
+    await bot.reply_to(message, "🎯 أرسل معرف المستخدم المستهدف:")
+    bot.register_next_step_handler(message, get_target_tasteer)
+
+async def get_target_tasteer(message):
+    target = message.text.strip()
+    await bot.reply_to(message, "⏱️ السرعة بين كل سطر (ثواني، مثال: 3):")
+    bot.register_next_step_handler(message, lambda m: start_tasteer(m, target))
+
+async def start_tasteer(message, target):
+    user_id = message.from_user.id
+    
+    try:
+        delay = float(message.text.strip())
+        if delay < 0.5:
+            raise ValueError
+    except:
+        await bot.reply_to(message, "❌ سرعة غير صالحة.")
+        return
+    
+    await bot.reply_to(message, f"🚀 سيتم إرسال 3 أسطر بفاصل {delay} ثانية.")
+    asyncio.create_task(send_tasteer_messages(user_id, target, delay, message.chat.id, bot))
+
+@bot.message_handler(commands=['stop'])
+async def stop(message):
+    user_id = message.from_user.id
+    
+    if user_id in active_spams:
+        active_spams[user_id]["stop"] = True
+        await bot.reply_to(message, "🛑 جاري الإيقاف...")
+    else:
+        await bot.reply_to(message, "⚠️ لا توجد عملية نشطة.")
+
+# =============== تشغيل البوت ===============
+async def main():
+    print("🔥 SHADOW BOT is running...")
+    await bot.polling()
+
+if __name__ == "__main__":
+    asyncio.run(main())    "اذب تيزاب بكسمك", "ابول بحلكك", "افرش كسمك", "افلش كسمك بوكسات", "انيج رب ربك",
     "اخضع لجباتي الحاره", "استرجل", "اشكه لكسمك وعلي", "اخلي تمص جبتي", "اسد كس امك",
     "افترس طيزك", "اختك كحبتي", "اعجن عيورتي بكسمك", "ابن مصاصه عيورتي", "شو دتعال",
     "امد تيل بصرمك", "حدث", "ادحس رجلي بكس اختك", "اشنقك بلباس امك", "اله اشكه لحلكك",
