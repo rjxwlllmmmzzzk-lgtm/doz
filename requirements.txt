@@ -1,2 +1,1 @@
-telethon==1.36.0
-pyTelegramBotAPI==4.16.0
+pip install pyTelegramBotAPI telethon
