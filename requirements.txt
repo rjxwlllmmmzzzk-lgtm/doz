@@ -1,1 +1,2 @@
-pip install pyTelegramBotAPI telethon
+pip install pyTelegramBotAPI
+pip install telethon
